@@ -1,2 +1,5 @@
 import "./components/my-tabla.js"
 import "./components/my-seccion.js"
+import "./components/my-nav.js"
+import "./components/my-footer.js"
+import "./components/my-seleccion.js"
