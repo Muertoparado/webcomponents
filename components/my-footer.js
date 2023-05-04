@@ -8,10 +8,21 @@ export default class myFooter extends HTMLElement{
     constructor(){
         super();
         this.attachShadow({mode: "open"});
-        Promise.resolve(myFooter.components()).then(html=>{
-            this.shadowRoot.innerHTML=html;
-        })
-        console.log("etiqueta seccion");
     }
+    handleEvent(e){
+      (e.type ==="click") ? this.button(e) : undefined;
+  }
+  button(e){
+      console.log(e);
+      e.preventDefault();
+      alert("botooon footer");
+  }
+  connectedCallback(){
+      Promise.resolve(myFooter.components()).then(html=>{
+          this.shadowRoot.innerHTML=html;
+          this.myFooter=this.shadowRoot.querySelector("#guardarfooter");
+          this.myFooter.addEventListener("click", this.handleEvent.bind(this));
+          })
+}
 }
 customElements.define(name,myFooter);

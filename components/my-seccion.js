@@ -8,10 +8,21 @@ export default class mySeccion extends HTMLElement{
     constructor(){
         super();
         this.attachShadow({mode: "open"});
+    }
+    handleEvent(e){
+        (e.type ==="click") ? this.button(e) : undefined;
+    }
+    button(e){
+        console.log(e);
+        e.preventDefault();
+        alert("botooon seccion");
+    }
+    connectedCallback(){
         Promise.resolve(mySeccion.components()).then(html=>{
             this.shadowRoot.innerHTML=html;
-        })
-        console.log("etiqueta seccion");
-    }
+            this.mySeccion=this.shadowRoot.querySelector("#guardarseccion");
+            this.mySeccion.addEventListener("click", this.handleEvent.bind(this));
+            })
+}
 }
 customElements.define(name,mySeccion);

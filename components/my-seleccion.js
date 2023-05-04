@@ -8,10 +8,22 @@ export default class mySeleccion extends HTMLElement{
     constructor(){
         super();
         this.attachShadow({mode: "open"});
-        Promise.resolve(mySeleccion.components()).then(html=>{
-            this.shadowRoot.innerHTML=html;
-        })
-        console.log("etiqueta nav");
+    }
+
+        handleEvent(e){
+            (e.type ==="click") ? this.button(e) : undefined;
+        }
+        button(e){
+            console.log(e);
+            e.preventDefault();
+            alert("botooon seleccion");
+        }
+        connectedCallback(){
+            Promise.resolve(mySeleccion.components()).then(html=>{
+                this.shadowRoot.innerHTML=html;
+                this.mySeleccion=this.shadowRoot.querySelector("#guardarseleccion");
+                this.mySeleccion.addEventListener("click", this.handleEvent.bind(this));
+                })
     }
 }
 customElements.define(name,mySeleccion);
